@@ -20,10 +20,25 @@ jobs:
       - run:
           name: Build
           command: yarn build
+      - persist_to_workspace:
+        root: ~/workspace
+        paths:
+          - code
 
   test:
     <<: *node_container
     steps:
+      - attach_workspace:
+        at: ~/workspace
       - run:
-        name: Test
+        name: Unit Test
         command: yarn test:unit
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build
+      - test: 
+        requires:
+          - build
