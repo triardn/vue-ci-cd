@@ -7,7 +7,7 @@ ref:
   node_container: &node_container
     docker:
       - image: circleci/node:10.13.0-stretch
-    workinig_directory: *workspace_directory  
+    working_directory: *workspace_directory  
 
 jobs:
   build:
